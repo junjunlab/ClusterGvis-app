@@ -3,3 +3,10 @@
 
  ![cover](https://github.com/user-attachments/assets/f68a4a13-9805-4b99-90f7-cbd9085fce34)
 
+# How to use
+
+You can download this repository to your local machine, open the ClusterGvis.Rproj file, and then run the following code to start the app:
+
+```R
+shiny::runApp("./")
+```
