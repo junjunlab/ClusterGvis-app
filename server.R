@@ -2,7 +2,6 @@ library(ClusterGVis)
 library(ggplot2)
 library(org.Hs.eg.db)
 library(org.Mm.eg.db)
-library(SeuratData)
 library(Seurat)
 library(monocle)
 library(monocle3)
@@ -53,12 +52,15 @@ function(input, output, session) {
     if(input$scexample_data == 'NULL'){
       infile <- input$sc_data$datapath
 
-      if (is.null(infile)) return(NULL)
-
-      readRDS(infile)
+      if (is.null(infile)){
+        return(NULL)
+      }else{
+        readRDS(infile)
+      }
     }else{
-      data("pbmc3k.final")
-      UpdateSeuratObject(object = pbmc3k.final)
+      # data("pbmc3k.final")
+      # UpdateSeuratObject(object = pbmc3k.final)
+      readRDS("data/pbmc.rds")
     }
   })
 
