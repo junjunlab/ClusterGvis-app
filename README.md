@@ -1,2 +1,5 @@
-# ClusterGvis-app
- An interactive tool for ClusterGvis
+# ClusterGvis Shiny Application
+ ClusterGvis is a user-friendly and customizable Shiny-based web application designed to streamline workflows for gene cluster-based enrichment analysis and the visualization of complex heatmaps. ClusterGvis provides an intuitive platform for biologists and bioinformaticians to perform functional enrichment analysis and advanced data visualization.
+
+ ![cover](https://github.com/user-attachments/assets/f68a4a13-9805-4b99-90f7-cbd9085fce34)
+
