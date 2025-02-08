@@ -4,6 +4,7 @@ library(org.Hs.eg.db)
 library(org.Mm.eg.db)
 library(Seurat)
 library(monocle)
+library(VGAM)
 library(monocle3)
 
 
@@ -313,7 +314,7 @@ function(input, output, session) {
 
         cds_subset <- m2obj()[row.names(m2difftest_data()),]
 
-        all_args <- c(list(cds_subset = cds_subset,
+        all_args <- c(list(cds = cds_subset,
                            cores = 1,
                            show_rownames = as.logical(input$show_rownames),
                            return_heatmap = T),
@@ -322,7 +323,7 @@ function(input, output, session) {
         ht <- do.call(plot_multiple_branches_heatmap2, all_args)
 
         # return list
-        all_args2 <- c(list(cds_subset = cds_subset,
+        all_args2 <- c(list(cds = cds_subset,
                             cores = 1,
                             show_rownames = as.logical(input$show_rownames)),
                        custom_args)
@@ -341,7 +342,7 @@ function(input, output, session) {
     m2ht()
   })
 
-  output$m2cl_table <- DT::renderDT(options = list(scrollX = TRUE),{m2htobj()})
+  output$m2cl_table <- DT::renderDT(options = list(scrollX = TRUE),{m2htobj()$wide.res})
 
   # download table
   output$download_m2cl_table <- downloadHandler(
