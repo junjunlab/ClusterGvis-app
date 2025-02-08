@@ -463,9 +463,13 @@ dashboardPage(
                            ),
                            column(8,
                                   fluidPage(
-                                    box(title = "plot",status = "danger",width = 12,solidHeader = T,
+                                    shinyjs::useShinyjs(),
+                                    box(title = "plot",status = "danger",solidHeader = T,id = "pbox",
+                                        fluidRow(
+                                          column(6,sliderInput("phw","plot panel width",value = 635,min = 0,max = 1500,step = 10)),
+                                          column(6,sliderInput("pht","plot panel height",value = 635,min = 0,max = 1500,step = 10))
+                                        ),
                                         plotOutput("cmb_plot") %>% withSpinner(type = 8)
-
                                     )
                                   ),
                                   fluidPage(

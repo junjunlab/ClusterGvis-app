@@ -39,7 +39,7 @@ function(input, output, session) {
   output$get_cluster <- renderPlot({
     # check optimal cluster numbers
     if(!is.null(mat())){
-      getClusters(exp = mat())
+      getClusters(obj = mat())
     }else{
       ggplot2::ggplot()
     }
@@ -556,7 +556,7 @@ function(input, output, session) {
     cluster_num <- input$cl_num
     cluster_method <- input$cl_method
 
-    result <- clusterData(exp = input_mat(),
+    result <- clusterData(obj = input_mat(),
                           cluster.method = cluster_method,
                           cluster.num = cluster_num)
 
@@ -765,9 +765,29 @@ function(input, output, session) {
 
   })
 
-  output$cmb_plot <- renderPlot({
+  # adjust box width
+  observe({
+    shinyjs::runjs(sprintf(
+      "document.getElementById('pbox').style.width = '%spx';",
+      input$phw
+    ))
+  })
+
+  observe({
+    shinyjs::runjs(sprintf(
+      "document.getElementById('pbox').style.height = '%spx';",
+      input$pht
+    ))
+  })
+
+
+  # plot output
+  output$cmb_plot <- renderPlot(
+    width = function(){input$phw - 20},
+    height = function(){input$pht - 170},{
     cmbht()
   })
+
 
   # download plot
   output$download_plot <- downloadHandler(
