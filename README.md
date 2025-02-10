@@ -10,3 +10,10 @@ You can download this repository to your local machine, open the ClusterGvis.Rpr
 ```R
 shiny::runApp("./")
 ```
+
+# Website
+
+- shinyapp.io: [https://laojunjun.shinyapps.io/clustergvis_app_v0/]( https://laojunjun.shinyapps.io/clustergvis_app_v0/)
+
+- Thanks to the Tianyi Cloud team for providing the online deployment of ClusterGVis.
+tanyicloud: [https://cloud.dftianyi.com/cloud-project/featuredTools/ClusterGVis](https://cloud.dftianyi.com/cloud-project/featuredTools/ClusterGVis)
