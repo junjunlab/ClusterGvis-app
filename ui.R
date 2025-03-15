@@ -73,7 +73,7 @@ dashboardPage(
               fluidPage(
                 tags$style(HTML(".nav-tabs { border-bottom: 2px solid #333; }.tab-content { margin-top: 20px; }")),
                 tabsetPanel(
-                  tabPanel(tags$b("1.input data"),
+                  tabPanel(tags$b("1.input table"),
                            tabsetPanel(
                              tabPanel(HTML("<b><i>matrix input</i></b>"),
                                       fluidRow(
@@ -463,13 +463,9 @@ dashboardPage(
                            ),
                            column(8,
                                   fluidPage(
-                                    shinyjs::useShinyjs(),
-                                    box(title = "plot",status = "danger",solidHeader = T,id = "pbox",
-                                        fluidRow(
-                                          column(6,sliderInput("phw","plot panel width",value = 635,min = 0,max = 1500,step = 10)),
-                                          column(6,sliderInput("pht","plot panel height",value = 635,min = 0,max = 1500,step = 10))
-                                        ),
+                                    box(title = "plot",status = "danger",width = 12,solidHeader = T,
                                         plotOutput("cmb_plot") %>% withSpinner(type = 8)
+
                                     )
                                   ),
                                   fluidPage(

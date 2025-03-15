@@ -2,9 +2,9 @@ library(ClusterGVis)
 library(ggplot2)
 library(org.Hs.eg.db)
 library(org.Mm.eg.db)
+library(SeuratData)
 library(Seurat)
 library(monocle)
-library(VGAM)
 library(monocle3)
 
 
@@ -53,15 +53,12 @@ function(input, output, session) {
     if(input$scexample_data == 'NULL'){
       infile <- input$sc_data$datapath
 
-      if (is.null(infile)){
-        return(NULL)
-      }else{
-        readRDS(infile)
-      }
+      if (is.null(infile)) return(NULL)
+
+      readRDS(infile)
     }else{
-      # data("pbmc3k.final")
-      # UpdateSeuratObject(object = pbmc3k.final)
-      readRDS("data/pbmc.rds")
+      data("pbmc3k.final")
+      UpdateSeuratObject(object = pbmc3k.final)
     }
   })
 
@@ -314,7 +311,7 @@ function(input, output, session) {
 
         cds_subset <- m2obj()[row.names(m2difftest_data()),]
 
-        all_args <- c(list(cds = cds_subset,
+        all_args <- c(list(cds_subset = cds_subset,
                            cores = 1,
                            show_rownames = as.logical(input$show_rownames),
                            return_heatmap = T),
@@ -323,7 +320,7 @@ function(input, output, session) {
         ht <- do.call(plot_multiple_branches_heatmap2, all_args)
 
         # return list
-        all_args2 <- c(list(cds = cds_subset,
+        all_args2 <- c(list(cds_subset = cds_subset,
                             cores = 1,
                             show_rownames = as.logical(input$show_rownames)),
                        custom_args)
@@ -342,7 +339,7 @@ function(input, output, session) {
     m2ht()
   })
 
-  output$m2cl_table <- DT::renderDT(options = list(scrollX = TRUE),{m2htobj()$wide.res})
+  output$m2cl_table <- DT::renderDT(options = list(scrollX = TRUE),{m2htobj()})
 
   # download table
   output$download_m2cl_table <- downloadHandler(
@@ -766,29 +763,9 @@ function(input, output, session) {
 
   })
 
-  # adjust box width
-  observe({
-    shinyjs::runjs(sprintf(
-      "document.getElementById('pbox').style.width = '%spx';",
-      input$phw
-    ))
-  })
-
-  observe({
-    shinyjs::runjs(sprintf(
-      "document.getElementById('pbox').style.height = '%spx';",
-      input$pht
-    ))
-  })
-
-
-  # plot output
-  output$cmb_plot <- renderPlot(
-    width = function(){input$phw - 20},
-    height = function(){input$pht - 170},{
+  output$cmb_plot <- renderPlot({
     cmbht()
   })
-
 
   # download plot
   output$download_plot <- downloadHandler(
