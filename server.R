@@ -775,7 +775,7 @@ function(input, output, session) {
 
     content = function(file) {
       if(!is.null(cluster_result())){
-        pdf(file,width = input$pwidth, height = input$pheight)
+        pdf(file,width = input$pwidth, height = input$pheight,onefile = FALSE)
 
         # check enrichment data
         if(!is.null(enrichment_result)){

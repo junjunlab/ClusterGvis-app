@@ -73,12 +73,12 @@ dashboardPage(
               fluidPage(
                 tags$style(HTML(".nav-tabs { border-bottom: 2px solid #333; }.tab-content { margin-top: 20px; }")),
                 tabsetPanel(
-                  tabPanel(tags$b("1.input table"),
+                  tabPanel(tags$b("1.Input data"),
                            tabsetPanel(
-                             tabPanel(HTML("<b><i>matrix input</i></b>"),
+                             tabPanel(HTML("<b><i>Matrix input</i></b>"),
                                       fluidRow(
                                         column(4,
-                                               box(title = "params",status = "orange",width = 12,solidHeader = T,
+                                               box(title = "Params",status = "orange",width = 12,solidHeader = T,
 
                                                    selectInput('example_data','Example data',
                                                                choices = c('exps','NULL'),selected = 'NULL'),
@@ -86,15 +86,15 @@ dashboardPage(
                                                )
                                         ),
                                         column(8,
-                                               box(title = "table",status = "orange",width = 12,solidHeader = T,
+                                               box(title = "Table",status = "orange",width = 12,solidHeader = T,
                                                    DT::DTOutput("input")
                                                ))
                                       )
                              ),
-                             tabPanel(HTML("<b><i>seurat input</i></b>"),
+                             tabPanel(HTML("<b><i>Seurat input</i></b>"),
                                       fluidRow(
                                         column(4,
-                                               box(title = "single cell params",status = "success",width = 12,solidHeader = T,
+                                               box(title = "Single cell params",status = "success",width = 12,solidHeader = T,
                                                    selectInput('scexample_data','Example data',
                                                                choices = c('pbmc3k.final','NULL'),selected = 'NULL'),
                                                    div(style = "margin-bottom: -25px;",
@@ -105,17 +105,17 @@ dashboardPage(
                                                    ),
                                                    fluidRow(
                                                      column(6,
-                                                            selectInput("showAverage","showAverage",
+                                                            selectInput("showAverage","ShowAverage",
                                                                         choices = c("TRUE","FALSE"),
                                                                         selected = "TRUE")
                                                      ),
                                                      column(6,
-                                                            selectInput("scale.data","scale.data",
+                                                            selectInput("scale.data","Scale.data",
                                                                         choices = c("TRUE","FALSE"),
                                                                         selected = "TRUE")
                                                      )
                                                    ),
-                                                   selectInput("keep.uniqGene","keep.uniqGene",
+                                                   selectInput("keep.uniqGene","Keep.uniqGene",
                                                                choices = c("TRUE","FALSE"),
                                                                selected = "TRUE"),
 
@@ -123,19 +123,19 @@ dashboardPage(
                                                )
                                         ),
                                         column(8,
-                                               box(title = "table",status = "success",width = 12,solidHeader = T,
+                                               box(title = "Table",status = "success",width = 12,solidHeader = T,
                                                    tabsetPanel(
-                                                     tabPanel("single cell data",DT::DTOutput("scprepareed_table")),
-                                                     tabPanel("diff marker genes table",DT::DTOutput("diff_table"))
+                                                     tabPanel("Single cell data",DT::DTOutput("scprepareed_table")),
+                                                     tabPanel("Diff marker genes table",DT::DTOutput("diff_table"))
                                                    )
                                                )
                                         )
                                       )
                              ),
-                             tabPanel(HTML("<b><i>monocle2 input</i></b>"),
+                             tabPanel(HTML("<b><i>Monocle2 input</i></b>"),
                                       fluidRow(
                                         column(4,
-                                               box(title = "monocle2 params",status = "primary",width = 12,solidHeader = T,
+                                               box(title = "Monocle2 params",status = "primary",width = 12,solidHeader = T,
 
                                                    selectInput('m2example_data','Example data',
                                                                choices = c('HSMM','NULL'),selected = 'NULL'),
@@ -143,61 +143,61 @@ dashboardPage(
                                                        fileInput("m2_data","Input data (monocle2 CellDataSet object with rds format)")
                                                    ),
 
-                                                   bsCollapsePanel(title = 'monocle differential gene test',value = '',style = 'primary',
+                                                   bsCollapsePanel(title = 'Monocle differential gene test',value = '',style = 'primary',
                                                                    div(style = "margin-bottom: -20px;",
-                                                                       fileInput("m2diff_data","monocle2 differentialGeneTest output with csv format")
+                                                                       fileInput("m2diff_data","Monocle2 differentialGeneTest output with csv format")
                                                                    ),
 
                                                                    div(style = "border-top: 2px solid #333; margin: 20px 0;"),
 
-                                                                   numericInput("num_cells_expressed","num_cells_expressed",value = 10,min = 1),
-                                                                   textInput("fullModelFormulaStr","fullModelFormulaStr",value = "~sm.ns(Pseudotime, df=3)"),
-                                                                   textInput("reducedModelFormulaStr","reducedModelFormulaStr",value = "~1"),
+                                                                   numericInput("num_cells_expressed","Num_cells_expressed",value = 10,min = 1),
+                                                                   textInput("fullModelFormulaStr","FullModelFormulaStr",value = "~sm.ns(Pseudotime, df=3)"),
+                                                                   textInput("reducedModelFormulaStr","ReducedModelFormulaStr",value = "~1"),
                                                                    fluidRow(
                                                                      column(6,
-                                                                            selectInput("relative_expr","relative_expr",
+                                                                            selectInput("relative_expr","Relative_expr",
                                                                                         choices = c("TRUE","FALSE"),
                                                                                         selected = "TRUE")
                                                                      ),
                                                                      column(6,
-                                                                            numericInput("cores","cores",value = 1,min = 1)
+                                                                            numericInput("cores","Cores",value = 1,min = 1)
                                                                      )
                                                                    ),
                                                                    actionButton("run_m2_diff", HTML('<span style="color: red; font-weight: bold;">Runing differentialGeneTest</span>'))
                                                    ),
-                                                   selectizeInput("mpht_type","heatmap type",
+                                                   selectizeInput("mpht_type","Heatmap type",
                                                                   choices = c("pseudotime heatmap","genes branched heatmap","multiple branches heatmap"),
                                                                   selected = "pseudotime heatmap"),
-                                                   numericInput("pval","pvalue threshold",value = 0.0001,min = 0,max = 1),
-                                                   selectInput("show_rownames","show_rownames",
+                                                   numericInput("pval","P value threshold",value = 0.0001,min = 0,max = 1),
+                                                   selectInput("show_rownames","Show rownames",
                                                                choices = c("TRUE","FALSE"),
                                                                selected = "TRUE"),
-                                                   bsCollapsePanel(title = 'plot pseudotime heatmap',value = '',style = 'primary',
-                                                                   textAreaInput("ph_params", "custom parameters:",
+                                                   bsCollapsePanel(title = 'Plot pseudotime heatmap',value = '',style = 'primary',
+                                                                   textAreaInput("ph_params", "Custom parameters:",
                                                                                  value = 'list(num_clusters = 4)',
                                                                                  resize = "vertical")
                                                    ),
-                                                   bsCollapsePanel(title = 'plot genes branched heatmap',value = '',style = 'primary',
-                                                                   textAreaInput("pbh_params", "custom parameters:",
+                                                   bsCollapsePanel(title = 'Plot genes branched heatmap',value = '',style = 'primary',
+                                                                   textAreaInput("pbh_params", "Custom parameters:",
                                                                                  value = 'list(num_clusters = 4,branch_point = 1)',
                                                                                  resize = "vertical")
                                                    ),
                                                    bsCollapsePanel(title = 'BEAM analysis',value = '',style = 'primary',
-                                                                   textInput("bfullModelFormulaStr","fullModelFormulaStr",value = "~sm.ns(Pseudotime, df = 3)*Branch"),
-                                                                   textInput("breducedModelFormulaStr","reducedModelFormulaStr",value = "~sm.ns(Pseudotime, df = 3)"),
-                                                                   numericInput("branch_point","branch_point",value = 1,min = 1),
-                                                                   textInput("branch_labels","branch_labels",value = "NULL"),
+                                                                   textInput("bfullModelFormulaStr","FullModelFormulaStr",value = "~sm.ns(Pseudotime, df = 3)*Branch"),
+                                                                   textInput("breducedModelFormulaStr","ReducedModelFormulaStr",value = "~sm.ns(Pseudotime, df = 3)"),
+                                                                   numericInput("branch_point","Branch_point",value = 1,min = 1),
+                                                                   textInput("branch_labels","Branch_labels",value = "NULL"),
                                                                    fluidRow(
                                                                      column(6,
-                                                                            selectInput("brelative_expr","relative_expr",
+                                                                            selectInput("brelative_expr","Relative_expr",
                                                                                         choices = c("TRUE","FALSE"),
                                                                                         selected = "TRUE")
                                                                      ),
                                                                      column(6,
-                                                                            numericInput("bcores","cores",value = 1,min = 1)
+                                                                            numericInput("bcores","Cores",value = 1,min = 1)
                                                                      )
                                                                    ),
-                                                                   textAreaInput("pmbh_params", "custom parameters for plot_multiple_branches_heatmap2:",
+                                                                   textAreaInput("pmbh_params", "Custom parameters for plot_multiple_branches_heatmap2:",
                                                                                  value = 'list(num_clusters = 4,branches = c(1,3,4,5))',
                                                                                  resize = "vertical"),
                                                                    actionButton("run_beam", HTML('<span style="color: red; font-weight: bold;">Runing BEAM</span>'))
@@ -207,69 +207,69 @@ dashboardPage(
 
                                                    ),
                                                    # ==============================download plot
-                                                   bsCollapsePanel(title = 'plot download',value = '',style = 'primary',
+                                                   bsCollapsePanel(title = 'Plot download',value = '',style = 'primary',
                                                                    fluidRow(
-                                                                     column(6,numericInput("htwidth",label = "plot width",min = 0,max = 50,value = 8)),
-                                                                     column(6,numericInput("htheight",label = "plot height",min = 0,max = 50,value = 10))
+                                                                     column(6,numericInput("htwidth",label = "Plot width",min = 0,max = 50,value = 8)),
+                                                                     column(6,numericInput("htheight",label = "Plot height",min = 0,max = 50,value = 10))
                                                                    ),
-                                                                   downloadButton('download_m2htplot','download plot')
+                                                                   downloadButton('download_m2htplot','Download plot')
                                                    )
 
                                                )
                                         ),
                                         column(8,
-                                               box(title = "table",status = "primary",width = 12,solidHeader = T,
+                                               box(title = "Table",status = "primary",width = 12,solidHeader = T,
                                                    tabsetPanel(
-                                                     tabPanel("heatmap",
+                                                     tabPanel("Heatmap",
                                                               plotOutput("m2heatmap")
                                                      ),
-                                                     tabPanel("diff genes table",
+                                                     tabPanel("Diff genes table",
                                                               DT::DTOutput("m2diff_table") %>% withSpinner(type = 8),
-                                                              downloadButton('download_m2diff_table','download table')
+                                                              downloadButton('download_m2diff_table','Download table')
                                                      ),
                                                      tabPanel("BEAM genes table",
                                                               DT::DTOutput("beam_table") %>% withSpinner(type = 8),
-                                                              downloadButton('download_beam_table','download table')
+                                                              downloadButton('download_beam_table','Download table')
                                                      ),
-                                                     tabPanel("clustered table",
+                                                     tabPanel("Clustered table",
                                                               DT::DTOutput("m2cl_table") %>% withSpinner(type = 8),
-                                                              downloadButton('download_m2cl_table','download table')
+                                                              downloadButton('download_m2cl_table','Download table')
                                                      )
                                                    )
 
                                                ))
                                       )
                              ),
-                             tabPanel(HTML("<b><i>monocle3 input</i></b>"),
+                             tabPanel(HTML("<b><i>Monocle3 input</i></b>"),
                                       fluidRow(
                                         column(4,
-                                               box(title = "params",status = "navy",width = 12,solidHeader = T,
+                                               box(title = "Params",status = "navy",width = 12,solidHeader = T,
                                                    selectInput('m3example_data','Example data',
                                                                choices = c('worm embryo','NULL'),selected = 'NULL'),
                                                    div(style = "margin-bottom: -10px;",
                                                        fileInput("m3_data","Input data (monocle3 CellDataSet object with rds format)")
                                                    ),
-                                                   numericInput("m3pval","pvalue threshold",value = 0.0001,min = 0,max = 1),
+                                                   numericInput("m3pval","P value threshold",value = 0.0001,min = 0,max = 1),
 
-                                                   bsCollapsePanel(title = 'graph test analysis',value = '',style = 'primary',
+                                                   bsCollapsePanel(title = 'Graph test analysis',value = '',style = 'primary',
                                                                    div(style = "margin-bottom: -20px;",
-                                                                       fileInput("m3diff_data","monocle3 graph_test output with csv format")
+                                                                       fileInput("m3diff_data","Monocle3 graph_test output with csv format")
                                                                    ),
 
                                                                    div(style = "border-top: 2px solid #333; margin: 20px 0;"),
 
-                                                                   selectInput("neighbor_graph","neighbor_graph",choices = c("knn", "principal_graph"),selected = "principal_graph"),
-                                                                   textInput("reduction_method","reduction_method",value = "UMAP"),
+                                                                   selectInput("neighbor_graph","Neighbor graph",choices = c("knn", "principal_graph"),selected = "principal_graph"),
+                                                                   textInput("reduction_method","Reduction method",value = "UMAP"),
 
                                                                    fluidRow(
                                                                      column(6,
                                                                             numericInput("k","k",value = 25,min = 1,max = 100)
                                                                      ),
                                                                      column(6,
-                                                                            numericInput("m3cores","cores",value = 1,min = 1,max = 100)
+                                                                            numericInput("m3cores","Cores",value = 1,min = 1,max = 100)
                                                                      )
                                                                    ),
-                                                                   selectInput("alternative","alternative",choices = c("greater","two.sided"),selected = "greater"),
+                                                                   selectInput("alternative","Alternative",choices = c("greater","two.sided"),selected = "greater"),
 
                                                                    actionButton("run_graph_test", HTML('<span style="color: red; font-weight: bold;">Runing graph_test analysis</span>'))
 
@@ -277,16 +277,16 @@ dashboardPage(
                                                )
                                         ),
                                         column(8,
-                                               box(title = "monocle3 diff table",status = "navy",width = 12,solidHeader = T,
+                                               box(title = "Monocle3 diff table",status = "navy",width = 12,solidHeader = T,
 
                                                    tabsetPanel(
-                                                     tabPanel("diff genes table",
+                                                     tabPanel("Diff genes table",
                                                               DT::DTOutput("m3diff_table") %>% withSpinner(type = 8),
                                                               downloadButton('download_m3diff_table','download table')
                                                      ),
-                                                     tabPanel("matrix table",
+                                                     tabPanel("Matrix table",
                                                               DT::DTOutput("m3mat_table") %>% withSpinner(type = 8),
-                                                              downloadButton('download_m3mat_table','download table')
+                                                              downloadButton('download_m3mat_table','Download table')
                                                      )
                                                    )
                                                ))
@@ -295,42 +295,42 @@ dashboardPage(
                            )
 
                   ),
-                  tabPanel(tags$b("2.cluster numbers"),
+                  tabPanel(tags$b("2.Cluster number estimation"),
                            column(4,
-                                  box(title = "params",status = "info",width = 12,solidHeader = T)
+                                  box(title = "Params",status = "info",width = 12,solidHeader = T)
                            ),
                            column(8,
-                                  box(title = "plot",status = "purple",width = 12,solidHeader = T,
+                                  box(title = "Plot",status = "purple",width = 12,solidHeader = T,
                                       plotOutput("get_cluster") %>% withSpinner(type = 8))
                            )
                   ),
-                  tabPanel(tags$b("3.gene clustering"),
+                  tabPanel(tags$b("3.Data clustering"),
                            column(4,
-                                  box(title = "params",status = "info",width = 12,solidHeader = T,
-                                      numericInput("cl_num","cluster numbers",value = 1,min = 1,max = 20),
-                                      selectInput("cl_method","cluster methods",
+                                  box(title = "Params",status = "info",width = 12,solidHeader = T,
+                                      numericInput("cl_num","Cluster numbers",value = 1,min = 1,max = 20),
+                                      selectInput("cl_method","Cluster methods",
                                                   choices = c("mfuzz","TCseq","kmeans"),
                                                   selected = "kmeans"),
                                       actionButton("run_clustering", HTML('<span style="color: red; font-weight: bold;">Clustering Started</span>'))
                                   )
                            ),
                            column(8,
-                                  box(title = "clustered table",status = "purple",width = 12,solidHeader = T,
+                                  box(title = "Clustered table",status = "purple",width = 12,solidHeader = T,
                                       DT::DTOutput("clustered_table"),
-                                      downloadButton('download_clustered_table','download table'))
+                                      downloadButton('download_clustered_table','Download table'))
                            )
                   ),
-                  tabPanel(tags$b("4.pathway enrichment"),
+                  tabPanel(tags$b("4.Enrichment analysis"),
                            column(4,
-                                  box(title = "params",status = "primary",width = 12,solidHeader = T,
+                                  box(title = "Params",status = "primary",width = 12,solidHeader = T,
                                       div(style = "margin-bottom: -25px;",
                                           fileInput("user_enrich", "Use own enrichment data")
                                       ),
-                                      selectInput("type","type (one or two options surpported)",
+                                      selectInput("type","Type (one or two options surpported)",
                                                   choices = c("BP","MF","CC","KEGG","ownSet"),
                                                   selected = "BP",multiple = T),
                                       div(style = "margin-bottom: -25px;",
-                                          fileInput("TERM2GENE","gene-term mapping data")
+                                          fileInput("TERM2GENE","Gene-term mapping data")
                                       ),
                                       fluidRow(
                                         column(6,
@@ -339,36 +339,36 @@ dashboardPage(
                                                            selected = "human")
                                         ),
                                         column(6,
-                                               selectInput("id.trans","id.trans",
+                                               selectInput("id.trans","Id trans",
                                                            choices = c("TRUE","FALSE"),
                                                            selected = "TRUE")
                                         )
                                       ),
                                       fluidRow(
                                         column(6,
-                                               textInput("fromType","fromType",value = "SYMBOL")
+                                               textInput("fromType","From type",value = "SYMBOL")
                                         ),
                                         column(6,
-                                               textInput("toType","toType",value = "ENTREZID")
+                                               textInput("toType","To type",value = "ENTREZID")
                                         )
                                       ),
                                       fluidRow(
                                         column(6,
-                                               selectInput("readable","readable",
+                                               selectInput("readable","Readable",
                                                            choices = c("TRUE","FALSE"),
                                                            selected = "TRUE")
                                         ),
                                         column(6,
-                                               textInput("organism","organism",value = "hsa")
+                                               textInput("organism","Organism",value = "hsa")
                                         )
                                       ),
-                                      sliderInput("pvalueCutoff","pvalueCutoff",min = 0,max = 1,step = 0.01,value = 0.05),
+                                      sliderInput("pvalueCutoff","P value cutoff",min = 0,max = 1,step = 0.01,value = 0.05),
                                       fluidRow(
                                         column(6,
-                                               numericInput("topn","topn",min = 0,max = 50,value = 5)
+                                               numericInput("topn","Top number",min = 0,max = 50,value = 5)
                                         ),
                                         column(6,
-                                               selectInput("add.gene","add.gene",
+                                               selectInput("add.gene","Add gene",
                                                            choices = c("TRUE","FALSE"),
                                                            selected = "FALSE")
                                         )
@@ -381,65 +381,65 @@ dashboardPage(
                            ),
                            column(8,
                                   fluidPage(
-                                    box(title = "enrichment table",status = "maroon",width = 12,solidHeader = T,
+                                    box(title = "Enrichment table",status = "maroon",width = 12,solidHeader = T,
                                         DT::DTOutput("enriched_table"),
-                                        downloadButton('download_enrich1','download table')
+                                        downloadButton('download_enrich1','Download table')
                                     )
                                   ),
                                   fluidPage(
-                                    box(title = "enrichment table2",status = "maroon",width = 12,solidHeader = T,
+                                    box(title = "Enrichment table2",status = "maroon",width = 12,solidHeader = T,
                                         DT::DTOutput("enriched_table2"),
-                                        downloadButton('download_enrich2','download table')
+                                        downloadButton('download_enrich2','Download table')
                                     )
                                   )
                            )
                   ),
-                  tabPanel(tags$b("5.visualization"),
+                  tabPanel(tags$b("5.Integrated visualization"),
                            column(4,
-                                  box(title = "params",status = "primary",width = 12,solidHeader = T,
+                                  box(title = "Params",status = "primary",width = 12,solidHeader = T,
                                       fluidRow(
                                         column(12,tags$p("Select colors for heatmap:",
                                                          style = "font-weight: bold; text-decoration: underline;")),
-                                        column(4,colourInput("low","low","#08519C")),
-                                        column(4,colourInput("mid","mid","white")),
-                                        column(4,colourInput("high","high","#A50F15"))
+                                        column(4,colourInput("low","Low","#08519C")),
+                                        column(4,colourInput("mid","Mid","white")),
+                                        column(4,colourInput("high","High","#A50F15"))
                                       ),
                                       fluidRow(
                                         column(12,tags$p("Select colors for membership lines:",
                                                          style = "font-weight: bold; text-decoration: underline;")),
-                                        column(4,colourInput("line_low","low","#0099CC")),
-                                        column(4,colourInput("line_mid","mid","grey90")),
-                                        column(4,colourInput("line_high","high","#CC3333"))
+                                        column(4,colourInput("line_low","Low","#0099CC")),
+                                        column(4,colourInput("line_mid","Mid","grey90")),
+                                        column(4,colourInput("line_high","High","#CC3333"))
                                       ),
                                       fluidRow(
                                         column(6,
-                                               selectInput("plot_type","plot type",choices = c("line","heatmap","both"),selected = "line")
+                                               selectInput("plot_type","Plot type",choices = c("line","heatmap","both"),selected = "line")
                                         ),
-                                        column(6,selectInput("add.bar","add.bar",
+                                        column(6,selectInput("add.bar","Add bar",
                                                              choices = c("TRUE","FALSE"),
                                                              selected = "FALSE"))
                                       ),
-                                      textAreaInput("marker_gene","gene symbols to be marked ",
-                                                    value = "supply gene symbols to be marked on heatmap with ‘,' seprated.",
+                                      textAreaInput("marker_gene","Gene symbols to be marked ",
+                                                    value = "Supply gene symbols to be marked on heatmap with ‘,' seprated.",
                                                     resize = "vertical"),
                                       fluidRow(
                                         column(6,
-                                               selectInput("line.side","line.side",choices = c("left","right"),selected = "right")
+                                               selectInput("line.side","Line side",choices = c("left","right"),selected = "right")
                                         ),
-                                        column(6,selectInput("markGenes.side","markGenes.side",choices = c("left","right"),selected = "right"))
+                                        column(6,selectInput("markGenes.side","MarkGenes side",choices = c("left","right"),selected = "right"))
                                       ),
                                       fluidRow(
                                         column(6,
-                                               numericInput("ncol","ncol",value = 4,min = 1,max = 30)
+                                               numericInput("ncol","Ncol",value = 4,min = 1,max = 30)
                                         ),
-                                        column(6,colourInput("mline.col","mline.col","#CC3333"))
+                                        column(6,colourInput("mline.col","Middle line color","#CC3333"))
                                       ),
 
 
 
                                       # ==============================
-                                      bsCollapsePanel(title = 'custom parameter setting',value = '',style = 'primary',
-                                                      textAreaInput("custom_params", "custom parameters:",
+                                      bsCollapsePanel(title = 'Custom parameter setting',value = '',style = 'primary',
+                                                      textAreaInput("custom_params", "Custom parameters:",
                                                                     value = 'list(column_names_rot = 45)',
                                                                     resize = "vertical")
 
@@ -451,26 +451,26 @@ dashboardPage(
 
 
                                       # ==============================download plot
-                                      bsCollapsePanel(title = 'plot download',value = '',style = 'primary',
+                                      bsCollapsePanel(title = 'Plot download',value = '',style = 'primary',
                                                       fluidRow(
-                                                        column(6,numericInput("pwidth",label = "plot width",min = 0,max = 50,value = 8)),
-                                                        column(6,numericInput("pheight",label = "plot height",min = 0,max = 50,value = 10))
+                                                        column(6,numericInput("pwidth",label = "Plot width",min = 0,max = 50,value = 8)),
+                                                        column(6,numericInput("pheight",label = "Plot height",min = 0,max = 50,value = 10))
                                                       ),
-                                                      downloadButton('download_plot','download plot')
+                                                      downloadButton('download_plot','Download plot')
                                       )
 
                                   )
                            ),
                            column(8,
                                   fluidPage(
-                                    box(title = "plot",status = "danger",width = 12,solidHeader = T,
+                                    box(title = "Plot",status = "danger",width = 12,solidHeader = T,
                                         plotOutput("cmb_plot") %>% withSpinner(type = 8)
 
                                     )
                                   ),
                                   fluidPage(
-                                    box(title = "documentation",status = "danger",width = 12,solidHeader = T,
-                                        actionButton("load_doc", "load viscluster documentation"),
+                                    box(title = "Documentation",status = "danger",width = 12,solidHeader = T,
+                                        actionButton("load_doc", "Load viscluster documentation"),
                                         htmlOutput("prams_doc", class = "doc-box")
                                     ),
                                     tags$style(HTML(".doc-box {
@@ -485,7 +485,7 @@ dashboardPage(
                                                       color: #333;
                                                     }
                                                   "))
-                                  ),
+                                  )
 
                            )
                   )
