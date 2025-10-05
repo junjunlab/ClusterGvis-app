@@ -73,7 +73,7 @@ dashboardPage(
               fluidPage(
                 tags$style(HTML(".nav-tabs { border-bottom: 2px solid #333; }.tab-content { margin-top: 20px; }")),
                 tabsetPanel(
-                  tabPanel(tags$b("1.Input data"),
+                  tabPanel(tags$b("1.Data input"),
                            tabsetPanel(
                              tabPanel(HTML("<b><i>Matrix input</i></b>"),
                                       fluidRow(
